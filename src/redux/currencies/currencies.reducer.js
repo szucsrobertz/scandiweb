@@ -19,6 +19,7 @@ const currencyReducer = (state = INITAIL_STATE,action) =>{
                 currencies:action.payload
             }
         case  CurrenciesActionTypes.CHANGE_BASE_CURRENCY:
+
             return {
                 ...state,
                 baseCurrency:action.payload
