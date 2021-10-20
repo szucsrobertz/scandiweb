@@ -1,4 +1,7 @@
 .clothes-page{
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
+    width: 50%;
+    margin: 10px auto;
 }

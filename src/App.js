@@ -11,6 +11,7 @@ import {getClothesProducts,getTechProducts} from './redux/products/products.acti
 
 import { gql, useQuery } from '@apollo/client';
 import TechPage from "./components/TechPage";
+import ProductPage from "./components/ProductPage";
 
 
 
@@ -61,6 +62,7 @@ function App({getCurrenciesTest,getClothesProductsTest,getTechProductsTest}) {
         <Switch>
           <Route path='/clothes' component={ClothesPage}></Route>
           <Route path='/tech' component={TechPage}></Route>
+          <Route path="/details/:id" component={ProductPage}></Route>
         </Switch>
       </div>
    
