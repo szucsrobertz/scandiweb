@@ -17,8 +17,9 @@ class ProductPage extends React.Component {
     render() {
         const {...product} =this.props.location.state.product   
         const {baseCurrency,addItem} = this.props
-        const res = product.prices.filter(currency => currency.currency === baseCurrency)
+        const selectedCurrency = product.prices.filter(currency => currency.currency === baseCurrency)
         const {selectedColor,selectedSize} = this.state
+
         
         let col =product.attributes.find(x => x.type ==="swatch")
         let size = product.attributes.find(x => x.type ==="text")
@@ -27,18 +28,19 @@ class ProductPage extends React.Component {
             <div className="product-container">
                 <Carousel images={product.gallery} />
                 <div className="product-description">
-                    {product.name} {product.brand}
+                   <p><h2>{product.name}</h2></p> 
+                   <p>{product.brand}</p>  
                     
 
             {col ? <div> 
-                     <p>Color :</p>
+                     <p><h2>Color :</h2></p>
                         <div className="size-container">
  
-                         {col.items.map((color) =>
+                         {col.items.map((color ,index) =>
                           (<div className={`color-value ${selectedColor === color.value ? "color-value-active" : ""} `} 
                           style={{backgroundColor:`${color.value}`}} 
-                          onClick={() => this.setState({selectedColor:color.value})}>
-
+                          onClick={() => this.setState({selectedColor:color.value})}   key={index}>
+                            
                           </div>))}
                         </div>
                      
@@ -47,27 +49,28 @@ class ProductPage extends React.Component {
 
             {size ? 
             <div> 
-            <p>Size :</p>
+            <p><h2>Size:</h2></p>
                <div className="size-container">
 
-                {size.items.map((size) => 
+                {size.items.map((size,index) => 
                 (<div 
                 className={`size-value ${selectedSize === size.value ? "size-value-active" : ""} `}
-                onClick={() => this.setState({selectedSize:size.value})} >
+                onClick={() => this.setState({selectedSize:size.value})} 
+                key={index}>
                     {size.value}</div>))}
                </div>
             
             </div> : null}
 
                     <div>
-                           <p>Price:</p>
-                           <p>{res[0].currency} {res[0].amount}</p>
+                           <p><h2>Price:</h2></p>
+                           <p><h2>{selectedCurrency[0].currency} {selectedCurrency[0].amount}</h2></p>
                        </div> 
 
 
                   
                        <div>
-                           <button onClick={() => addItem(product,selectedSize,selectedColor)}>ADD TO CART</button>
+                           <button onClick={() => addItem(product,selectedSize,selectedColor)} className="button-container">ADD TO CART</button>
                         </div>
                 <div dangerouslySetInnerHTML={{ __html: product.description }}></div>
                 </div>

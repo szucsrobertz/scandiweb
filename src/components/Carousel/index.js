@@ -20,12 +20,13 @@ class Carousel extends React.Component{
     render(){
         const { active } = this.state;
     const { images } = this.props;
+
+    
    
         return(
             <div className="carousel">
         <div className="carousel-smaller">
           {images.map((photo, index) => (
-              // eslint-disable-next-line
               <img
               key={photo}
               src={photo}

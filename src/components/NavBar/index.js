@@ -19,8 +19,12 @@ class NavBar extends React.Component {
                 <div className='options'>
                 <NavLink className='option'to='/clothes' activeClassName="active-link" >Clothes</NavLink>
                 <NavLink className='option' to='/tech' activeClassName="active-link">Tech</NavLink>
+              
+                </div>
+                <div className="selections">
                 <CurrencyPicker />
                 <CartIcon />
+
                 </div>
             {hidden ? null : <CartDropDown />}
             </div>

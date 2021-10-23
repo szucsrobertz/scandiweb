@@ -4,33 +4,45 @@ import { createStructuredSelector } from 'reselect';
 import {Link,withRouter} from 'react-router-dom'
 
 import {baseCurrency} from '../../redux/currencies/currencies.selectors'
+import { selectCartItems } from '../../redux/cart/cart.selectors';
+
+import { IoIosCart } from "react-icons/io";
 
 import './styles.scss'
 
 class CollectionItem extends React.Component{
     render() {
         const {...product} = this.props.product
-        const {baseCurrency} = this.props
-        const res = product.prices.filter(currency => currency.currency === baseCurrency)
-      
+        const {baseCurrency,cartItems} = this.props
+        const selectedCurrency = product.prices.filter(currency => currency.currency === baseCurrency)
+        
+        const inCart =cartItems.some(pro => {return pro.name === product.name})
+
         return(
             <Link
-            className="collection-item" 
+            className="collection-item"
             to={{
                 pathname:`/details/${product.id}`,
                 state:{
                     product:product
                 }}}>
-            <div >
-                <div className="item-photo">
+            <div className={`${product.inStock ? null: "not-in-stock"}`}>
+             
+               {product.inStock ?null : <p className="stock">out of stock</p>}
+               {inCart ? <p className="cart-icon"> <IoIosCart size={100} style={{ borderRadius:"100%", backgroundColor:"#05df46"}} color="white"/></p>
+               : null}
+                    <div className="item-photo">
                  <img src={product.gallery[0]} alt="product" />
+          
                 </div>
                 <div>
-                    <p>{product.brand}</p>
-                    <p>{product.name}</p>
-                    <p>{res[0].currency} {res[0].amount}</p>
+                    <p>{product.brand} {product.name}</p>
+                    <p></p>
+                    <p style={{fontWeight:"bold"}}>{selectedCurrency[0].currency} {selectedCurrency[0].amount}</p>
+                 
                 </div>
-            </div>
+                </div>
+            
             </Link>
             
         )
@@ -39,6 +51,7 @@ class CollectionItem extends React.Component{
 
 const mapStateToProps = createStructuredSelector({
     baseCurrency: baseCurrency,
+    cartItems: selectCartItems
 })
 
 

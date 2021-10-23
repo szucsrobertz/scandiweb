@@ -4,11 +4,12 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 
-import {store} from './redux/store'
+import { store} from './redux/store';
 
 const client = new ApolloClient({
   uri: "http://localhost:4000/",
@@ -18,7 +19,7 @@ const client = new ApolloClient({
 ReactDOM.render(
   <ApolloProvider client={client}>
     <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter>    
     <App />
   </BrowserRouter>
   </Provider>

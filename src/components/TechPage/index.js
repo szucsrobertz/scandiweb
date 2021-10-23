@@ -11,6 +11,7 @@ import './styles.scss'
 class TechPage extends React.Component{
     render() {
         const {techProducts} =this.props
+
         return(
             <div className="tech-page">
                 {techProducts[0].products.map((product,index) =>

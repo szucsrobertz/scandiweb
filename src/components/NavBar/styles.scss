@@ -1,17 +1,17 @@
 .nav-container {
     height: 70px;
-    width: 100%;
     display: flex;
-    justify-content:space-around;
     margin: 25px 25px ;
+    width: 80%;
+    margin: 0 auto;
  
   
     .options {
-      width: 50%;
+      width: 90%;
       height: 100%;
       display: flex;
       align-items: center;
-      justify-content: space-around;
+      justify-content:flex-start;
       text-decoration: none;
 
      
@@ -31,6 +31,13 @@
           
       }
   
+    }
+
+    .selections {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      justify-content: flex-end;
     }
   }
 

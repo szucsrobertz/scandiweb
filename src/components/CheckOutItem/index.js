@@ -1,27 +1,33 @@
-import React from 'react'
-import { connect } from 'react-redux'
+import React from 'react';
+import {connect} from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import {baseCurrency} from '../../redux/currencies/currencies.selectors'
+import { baseCurrency } from '../../redux/currencies/currencies.selectors';
 import { addItem, removeItem } from '../../redux/cart/cart.actions';
 
-import './styles.scss'
+import ImageSlider from '../ImageSlider'
 
-class CartItem extends React.Component {
-    render(){
+import './styles.scss';
+
+class CheckOutItem extends React.Component{
+    render() {
+
         const {...product} = this.props.item
         const {baseCurrency,addItem,removeItem} = this.props
         const selectedCurrency = product.prices.filter(currency => currency.currency === baseCurrency)
-        
+     
+
         let col =product.attributes.find(x => x.type ==="swatch")
         let size = product.attributes.find(x => x.type ==="text")
         return(
-            <div className='cart-item'>
-            <div className='item-details'>
-                <span className='name'>{product.name}</span>
-                <span className='price'><h3>{selectedCurrency[0].currency} {product.quantity * selectedCurrency[0].amount}</h3></span>
-                {col ? <div> 
-                     <p>Color :</p>
+            <div className="checkout-container">
+               <div>
+                  <p><h2>{product.brand}</h2></p> 
+                  <p>{product.name}</p>
+                  <p><h2>{selectedCurrency[0].currency} {product.quantity *selectedCurrency[0].amount}</h2></p>
+
+                  {col ? <div> 
+                 
                         <div className="size-container">
  
                          {col.items.map((color,index) =>
@@ -37,7 +43,7 @@ class CartItem extends React.Component {
 
             {size ? 
             <div> 
-            <p>Size :</p>
+    
                <div className="size-container">
 
                 {size.items.map((size,index) => 
@@ -49,14 +55,19 @@ class CartItem extends React.Component {
                </div>
             
             </div> : null}
-            </div>
-            <div className="quantity-continaer">
+               </div>
+               <div className="end">
+               <div className="quantity-continaer">
                 <p className="quantity" onClick={() => addItem(product)}>+</p>
                 <p>{product.quantity} </p>
                 <p className="quantity" onClick={() => removeItem(product)}>-</p>
             </div>
-            <img  src={product.gallery[0]} alt="product"  />
-        </div>
+            <div className="image-slider">
+            <ImageSlider images={product.gallery} />
+            </div>
+               </div>
+          
+            </div>
         )
     }
 }
@@ -66,9 +77,9 @@ const mapDispatchToProps = dispatch => ({
     removeItem: item => dispatch(removeItem(item))
 })
 
+
 const mapStateToProps = createStructuredSelector({
-    baseCurrency: baseCurrency,
+    baseCurrency:baseCurrency
 })
 
-
-export default connect(mapStateToProps,mapDispatchToProps)(CartItem)
+export default connect(mapStateToProps,mapDispatchToProps)(CheckOutItem)

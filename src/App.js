@@ -1,4 +1,4 @@
-import React ,{useEffect}from "react";
+import React from "react";
 import './App.css';
 import NavBar from "./components/NavBar";
 import { Switch, Route} from 'react-router-dom';
@@ -12,6 +12,9 @@ import {getClothesProducts,getTechProducts} from './redux/products/products.acti
 import { gql, useQuery } from '@apollo/client';
 import TechPage from "./components/TechPage";
 import ProductPage from "./components/ProductPage";
+import CheckOutPage from "./components/CheckOutPage";
+import HomePage from "./components/HomePage";
+
 
 
 
@@ -60,9 +63,11 @@ function App({getCurrenciesTest,getClothesProductsTest,getTechProductsTest}) {
     <div> 
         <NavBar/>
         <Switch>
+          <Route exact path="/" component={HomePage}></Route>
           <Route path='/clothes' component={ClothesPage}></Route>
           <Route path='/tech' component={TechPage}></Route>
           <Route path="/details/:id" component={ProductPage}></Route>
+          <Route path='/checkout' component={CheckOutPage}></Route>
         </Switch>
       </div>
    

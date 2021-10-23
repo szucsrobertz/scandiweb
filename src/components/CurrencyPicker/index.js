@@ -2,6 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import { createStructuredSelector } from 'reselect';
 
+import { IoIosArrowDown } from "react-icons/io";
+
 import {toggleCurrencyHidden} from '../../redux/currencies/currencies.actions'
 import {selectCurrencyHidden} from '../../redux/currencies/currencies.selectors'
 import {selectCurrencies} from '../../redux/currencies/currencies.selectors'
@@ -16,7 +18,7 @@ class CurrencyPicker extends React.Component {
         return(
             <div>
                 <div className="currency-container" onClick={toggleCurrencyHidden}>
-                    {baseCurrency} &#xf107;
+                    {baseCurrency} <IoIosArrowDown />
                 </div>
 
             {hidden ? null : 
