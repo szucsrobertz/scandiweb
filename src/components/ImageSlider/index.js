@@ -35,7 +35,9 @@ class ImageSlider extends React.Component{
         const length = images.length
         return(
             <div className="slider">
-        <IoIosArrowBack className='left-arrow' onClick={() =>this.prevSlide(current, length)}/>
+
+              { length > 1 ?  <IoIosArrowBack className='left-arrow' onClick={() =>this.prevSlide(current, length)}/> : null}
+       
      
                 {images.map((slide,index) => {
                     return(
@@ -49,8 +51,8 @@ class ImageSlider extends React.Component{
                       </div>
                     )
                 })}
+ { length > 1 ?  <IoIosArrowForward className='right-arrow' onClick={() =>this.nextSlide(current, length)}/> : null}
 
-<IoIosArrowForward className='right-arrow' onClick={() =>this.nextSlide(current, length)}/>
             </div>
         )
     }

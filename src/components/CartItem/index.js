@@ -5,6 +5,8 @@ import { createStructuredSelector } from 'reselect';
 import {baseCurrency} from '../../redux/currencies/currencies.selectors'
 import { addItem, removeItem } from '../../redux/cart/cart.actions';
 
+import getSymbolFromCurrency from 'currency-symbol-map'
+
 import './styles.scss'
 
 class CartItem extends React.Component {
@@ -14,14 +16,24 @@ class CartItem extends React.Component {
         const selectedCurrency = product.prices.filter(currency => currency.currency === baseCurrency)
         
         let col =product.attributes.find(x => x.type ==="swatch")
-        let size = product.attributes.find(x => x.type ==="text")
+        let size = product.attributes.find(x => x.name ==="Size")
+        let capacity = product.attributes.find(x => x.name === "Capacity")
+        let usb = product.attributes.find(x=> x.name === "With USB 3 ports")
+        let touchId = product.attributes.find(x => x.name === "Touch ID in keyboard")
         return(
             <div className='cart-item'>
             <div className='item-details'>
+                <div>
+
+                <span>{product.brand}</span>
                 <span className='name'>{product.name}</span>
-                <span className='price'><h3>{selectedCurrency[0].currency} {product.quantity * selectedCurrency[0].amount}</h3></span>
+                </div>
+          
+             
+              
+                <span className="price">  {getSymbolFromCurrency(selectedCurrency[0].currency)} {selectedCurrency[0].amount}</span >
                 {col ? <div> 
-                     <p>Color :</p>
+                   
                         <div className="size-container">
  
                          {col.items.map((color,index) =>
@@ -37,7 +49,7 @@ class CartItem extends React.Component {
 
             {size ? 
             <div> 
-            <p>Size :</p>
+         
                <div className="size-container">
 
                 {size.items.map((size,index) => 
@@ -45,6 +57,47 @@ class CartItem extends React.Component {
                 className={` ${product.size === size.value ? "size-value-active" : "size-value"} `}
                 key={index}
                 >
+                    {size.value}</div>))}
+               </div>
+            
+            </div> : null}
+
+            {capacity ? 
+            <div> 
+           
+               <div className="size-container">
+
+                {capacity.items.map((size,index) => 
+                (<div 
+                className={`size-value ${product.capacity === size.value ? "size-value-active" : ""} `}
+                key={index}>
+                    {size.value}</div>))}
+               </div>
+            
+            </div> : null}
+
+            {usb ? 
+            <div> 
+          
+               <div className="size-container">
+
+                {usb.items.map((size,index) => 
+                (<div 
+                className={`size-value ${product.usb === size.value ? "size-value-active" : ""} `}
+                key={index}>
+                    {size.value}</div>))}
+               </div>
+            
+            </div> : null}
+
+            {touchId ? 
+            <div> 
+               <div className="size-container">
+
+                {touchId.items.map((size,index) => 
+                (<div 
+                className={`size-value ${product.touchId === size.value ? "size-value-active" : ""} `}
+                key={index}>
                     {size.value}</div>))}
                </div>
             

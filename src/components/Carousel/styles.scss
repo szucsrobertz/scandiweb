@@ -20,6 +20,13 @@
         overflow: auto;
         overflow-y: auto;
         width: 100%;
+        -ms-overflow-style: none;  /* Internet Explorer 10+ */
+        scrollbar-width: none;  /* Firefox */
+
+
+        &::-webkit-scrollbar { 
+          display: none;  /* Safari and Chrome */
+      }
       }
       
       .carousel-smaller > img {

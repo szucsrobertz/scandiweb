@@ -17,7 +17,7 @@ const INITIAL_STATE = {
         case CartActionTypes.ADD_ITEM:
           return {
             ...state,
-            cartItems: addItemToCart(state.cartItems, action.payload, action.size, action.colorSelected),
+            cartItems: addItemToCart(state.cartItems, action.payload, action.size, action.colorSelected, action.capacity,action.usb,action.touchId),
           };
           case CartActionTypes.REMOVE_ITEM:
             return {

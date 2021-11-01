@@ -9,22 +9,27 @@ import ImageSlider from '../ImageSlider'
 
 import './styles.scss';
 
+import getSymbolFromCurrency from 'currency-symbol-map'
+
 class CheckOutItem extends React.Component{
     render() {
 
         const {...product} = this.props.item
         const {baseCurrency,addItem,removeItem} = this.props
         const selectedCurrency = product.prices.filter(currency => currency.currency === baseCurrency)
+   
      
-
         let col =product.attributes.find(x => x.type ==="swatch")
-        let size = product.attributes.find(x => x.type ==="text")
+        let size = product.attributes.find(x => x.name ==="Size")
+        let capacity = product.attributes.find(x => x.name === "Capacity")
+        let usb = product.attributes.find(x=> x.name === "With USB 3 ports")
+        let touchId = product.attributes.find(x => x.name === "Touch ID in keyboard")
         return(
             <div className="checkout-container">
                <div>
-                  <p><h2>{product.brand}</h2></p> 
+                  <h2>{product.brand}</h2>
                   <p>{product.name}</p>
-                  <p><h2>{selectedCurrency[0].currency} {product.quantity *selectedCurrency[0].amount}</h2></p>
+                 <h2>{getSymbolFromCurrency(selectedCurrency[0].currency)} {product.quantity *selectedCurrency[0].amount}</h2>
 
                   {col ? <div> 
                  
@@ -51,6 +56,49 @@ class CheckOutItem extends React.Component{
                 className={` ${product.size === size.value ? "size-value-active" : "size-value"} `}
                 key={index}
                 >
+                    {size.value}</div>))}
+               </div>
+            
+            </div> : null}
+
+            {capacity ? 
+            <div> 
+               <div className="size-container">
+                {capacity.items.map((size,index) => 
+                (<div 
+                className={`${product.capacity === size.value ? "size-value-active" : "size-value"} `}
+              
+                key={index}>
+                    {size.value}</div>))}
+               </div>
+            
+            </div> : null}
+
+            {usb ? 
+            <div> 
+      
+               <div className="size-container">
+
+                {usb.items.map((size,index) => 
+                (<div 
+                className={`${product.usb === size.value ? "size-value-active" : "size-value"} `}
+             
+                key={index}>
+                    {size.value}</div>))}
+               </div>
+            
+            </div> : null}
+
+            {touchId ? 
+            <div> 
+         
+               <div className="size-container">
+
+                {touchId.items.map((size,index) => 
+                (<div 
+                className={`${product.touchId === size.value ? "size-value-active" : "size-value"} `}
+               
+                key={index}>
                     {size.value}</div>))}
                </div>
             

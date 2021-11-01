@@ -19,10 +19,8 @@ class Carousel extends React.Component{
     
     render(){
         const { active } = this.state;
-    const { images } = this.props;
+        const { images } = this.props;
 
-    
-   
         return(
             <div className="carousel">
         <div className="carousel-smaller">

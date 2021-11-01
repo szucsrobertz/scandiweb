@@ -6,42 +6,70 @@ import { createStructuredSelector } from 'reselect';
 
 import CartItem from '../CartItem';
 
-import { selectCartItems,selectCartTotal,selectCartItemsCount } from '../../redux/cart/cart.selectors';
+import { selectCartItems,selectCartTotal,selectCartItemsCount,selectCartHidden } from '../../redux/cart/cart.selectors';
+import {toggleCartHidden} from '../../redux/cart/cart.actions'
 
 import './styles.scss'
 
 class CartDropDown extends React.Component{
-    render() {
-        const {cartItems,total,itemCount} = this.props
-        const {...history} = this.props.history
-        return(
-            <div className="cart-dropdown">
-                <div>
+    componentDidMount() {
+        document.addEventListener("mousedown", this.handleClickOutside);
+      
+      }
+    
+      componentWillUnmount() {
+        document.removeEventListener("mousedown", this.handleClickOutside);
+      
+      }
+      myRef = React.createRef();
+  
+      handleClickOutside = e => {
+        if (e.target.className === "cart-icon") {
+            this.props.toggleCartHidden()
+        }else if( !this.myRef.current.contains(e.target) && !this.props.hidden){
+            this.props.toggleCartHidden()
+        }
+      };
 
-                <h2 style={{display:"inline"}}>My bag</h2> , {itemCount} items
+    render() {
+        const {cartItems,total,itemCount,toggleCartHidden} = this.props
+        const history = this.props.history
+       
+        return(
+            <div className="cart-dropdown" ref={this.myRef} >
+                <div>
+                <h2  className="bag-container">My bag</h2>, {itemCount} items
                 </div>
             <div className="cart-items">
             {cartItems.map((item) =>(
                 <CartItem item={item} key={item.id}/>
             ))}
-
-           
             </div>
-           
-                <button className="button-container"
-                onClick={() =>{history.push('/checkout')}}
+                
+                <div className="total-container">
+                <h2>Total: </h2>
+                <h2> {total.toFixed(2)}</h2>
+                     </div>
+                <div className="button-container">
+            <button className="checkout-button"
+                onClick={() =>{history.push('/checkout'); toggleCartHidden()}}
                 >Checkout
                 </button>
-                <h2>Total: {total}</h2>
+            </div>
         </div>
         )
     }
 }
 
+const mapDispatchToProps = dispatch => ({
+    toggleCartHidden: () => dispatch(toggleCartHidden())
+})
+
 const mapStateToProps = createStructuredSelector({
     cartItems: selectCartItems,
     total: selectCartTotal,
-    itemCount:selectCartItemsCount
+    itemCount:selectCartItemsCount,
+    hidden: selectCartHidden
 })
 
-export default withRouter(connect(mapStateToProps)(CartDropDown))
+export default withRouter(connect(mapStateToProps,mapDispatchToProps)(CartDropDown))

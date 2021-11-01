@@ -2,8 +2,9 @@
     width: 100%;
     display: flex;
     justify-content:space-between;
-    height: 10  0px;
-    margin-bottom: 15px;
+    height: 40%;
+    
+    margin:20px auto;
   
     img {
       width: 30%;
@@ -15,11 +16,13 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      justify-content: center;
-      padding: 10px 20px;
+      justify-content: space-between;
+    
+      
   
       .name {
         font-size: 16px;
+        display: block;
       }
     }
 
@@ -28,10 +31,11 @@
     }
 
     .quantity-continaer{
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      height: auto;
+        p{margin: 0;}
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      
       .quantity{
         border: 1px solid black;
         padding: 5px;
@@ -53,19 +57,24 @@
       
     }
     .size-value{
-      margin: 0px 5px;
+      margin: 5px 5px 0px 0px;
       width: 100%;
       height: 100%;
       border: 1px solid black;
-      opacity: 0.5;
+     
     }
 
     .size-value-active {
+      margin: 5px 5px 0px 0px;
       width: 100%;
       height: 100%;
       border: 1px solid black;
       background-color: black;
       color: white;
-      
+    }
+
+    .price{
+      font-weight: 700;
+      margin: 10px 0;
     }
   }
