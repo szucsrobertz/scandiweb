@@ -76,7 +76,7 @@ class CheckOutItem extends React.Component{
 
             {usb ? 
             <div> 
-      
+                <h6>USB 3 ports</h6>
                <div className="size-container">
 
                 {usb.items.map((size,index) => 
@@ -91,7 +91,7 @@ class CheckOutItem extends React.Component{
 
             {touchId ? 
             <div> 
-         
+                <h6>Touch ID in keyboard</h6>
                <div className="size-container">
 
                 {touchId.items.map((size,index) => 

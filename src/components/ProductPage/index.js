@@ -35,6 +35,7 @@ class ProductPage extends React.Component {
         const query = gql`
            query product($id:String!){
                product(id:$id){
+                id
                 name,
                 inStock,
                 gallery,
@@ -69,6 +70,7 @@ class ProductPage extends React.Component {
   
       
    const product = this.state.product
+ 
 
         const {baseCurrency,addItem} = this.props
         if(!this.state.loading){
@@ -201,6 +203,8 @@ class ProductPage extends React.Component {
                                     } else if(!selectedColor || !selectedCapacity || !selectedTouchId) {
                                         alert("please select all attributes")
                                     }
+                                   }else if(!size && !col && !capacity && !usb && !touchId){
+                                       addItem(product)
                                    }
                                }else {
                                    alert("item not in stock")

@@ -34,6 +34,7 @@ class CartDropDown extends React.Component{
     render() {
         const {cartItems,total,itemCount,toggleCartHidden} = this.props
         const history = this.props.history
+    
        
         return(
             <div className="cart-dropdown" ref={this.myRef} >
@@ -41,8 +42,8 @@ class CartDropDown extends React.Component{
                 <h2  className="bag-container">My bag</h2>, {itemCount} items
                 </div>
             <div className="cart-items">
-            {cartItems.map((item) =>(
-                <CartItem item={item} key={item.id}/>
+            {cartItems.map((item,index) =>(
+                <CartItem item={item} key={index}/>
             ))}
             </div>
                 

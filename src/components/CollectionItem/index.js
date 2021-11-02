@@ -40,7 +40,7 @@ class CollectionItem extends React.Component{
             <div className={`${product.inStock ? null: "not-in-stock"}`}>
              
                {product.inStock ?null : <p className="stock">out of stock</p>}
-               {product.attributes.length ===0 && this.state.hover && product.inStock? <div className="cart-icon" onClick={() => addItem(product)}> <IoIosCart size={30}  color="white" /></div>
+               {this.state.hover && product.inStock? <div className="cart-icon" onClick={() => {if (product.attributes.length === 0){addItem(product)}}}> <IoIosCart size={30}  color="white" /></div>
                : null}
                     <div className="item-photo">
                  <img src={product.gallery[0]} alt="product" />

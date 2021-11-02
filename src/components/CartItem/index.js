@@ -78,7 +78,8 @@ class CartItem extends React.Component {
 
             {usb ? 
             <div> 
-          
+                <h6>  USB 3 ports</h6>
+               
                <div className="size-container">
 
                 {usb.items.map((size,index) => 
@@ -92,13 +93,15 @@ class CartItem extends React.Component {
 
             {touchId ? 
             <div> 
+                <h6>Touch ID in keyboard</h6>
+              
                <div className="size-container">
 
                 {touchId.items.map((size,index) => 
-                (<div 
+                (<p 
                 className={`size-value ${product.touchId === size.value ? "size-value-active" : ""} `}
                 key={index}>
-                    {size.value}</div>))}
+                    {size.value}</p>))}
                </div>
             
             </div> : null}
@@ -108,7 +111,7 @@ class CartItem extends React.Component {
                 <p>{product.quantity} </p>
                 <p className="quantity" onClick={() => removeItem(product)}>-</p>
             </div>
-            <img  src={product.gallery[0]} alt="product"  />
+            <img  src={product.gallery[0]} alt="product" />
         </div>
         )
     }

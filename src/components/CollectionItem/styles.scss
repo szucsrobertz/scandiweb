@@ -1,8 +1,9 @@
 .collection-item{
     width: 30%;
     height: 400px;
-    margin: 0 15px;
+    margin: 10px 10px;
     position: relative;
+    
 
     &:hover {
         box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
@@ -41,7 +42,7 @@
     }
     
         .cart-icon{
-            margin-top: -63px;
+            margin-top: -60px;
             cursor: pointer;
            top: 320px;
            left: 350px;
@@ -49,6 +50,7 @@
             width: 60px;
             height: 60px;
           background-color: #05df46;
+          z-index: 100px;
         }
         .currency-container{
             font-weight: bold;
